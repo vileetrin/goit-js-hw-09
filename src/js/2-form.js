@@ -17,10 +17,12 @@ checkFormFields();
 
 function handleInput(event) {
     const { name, value } = event.target;
-    const formData = {
-        [name]: value.trim()
-    };
-        localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+
+    let formData = JSON.parse(localStorage.getItem('feedback-form-state')) || {};
+    
+    formData[name] = value.trim();
+    localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+    
 }
     
 
@@ -32,7 +34,7 @@ function handleSubmit(event) {
         message: form.elements.message.value.trim()
     };
     
-    if (formData.email === '' || formData.message === '') {
+    if (formData.email.trim() === '' || formData.message.trim() === '') {
         alert('Будь ласка, заповніть обидва поля форми.');
         return; 
     }
