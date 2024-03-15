@@ -20,9 +20,13 @@ function handleInput(event) {
 
     let formData = JSON.parse(localStorage.getItem('feedback-form-state')) || {};
     
-    formData[name] = value.trim();
-    localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+    if (value.trim() !== '') {
+        formData[name] = value.trim();
+    } else {
+        delete formData[name];
+    }
     
+    localStorage.setItem('feedback-form-state', JSON.stringify(formData));
 }
     
 
