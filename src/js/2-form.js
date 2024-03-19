@@ -6,9 +6,9 @@ form.addEventListener('submit', handleSubmit);
 function checkFormFields() {
     const storedData = localStorage.getItem('feedback-form-state');
     if (storedData) {
-        const formData = JSON.parse(storedData);
-        form.elements.email.value = formData.email;
-        form.elements.message.value = formData.message;
+        const formData = JSON.parse(storedData) || {};
+        form.elements.email.value = formData.email || "";
+        form.elements.message.value = formData.message || "";
     }
 }
 
